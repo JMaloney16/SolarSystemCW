@@ -1,5 +1,7 @@
 package com.company;
 
+import java.text.DecimalFormat;
+
 public class Planet {
     private String name;
     private double mass;
@@ -24,9 +26,12 @@ public class Planet {
         }
     }
 
+
+
     @Override
     public String toString() {
+        DecimalFormat periodFormat = new DecimalFormat("0.0##");
         return "Planet " + name + " has a mass of " + mass + " Earths, is "
-                + distance + "AU from its star and orbits in " + period + " years: habitable? " + this.isHabitable() +"\n";
+                + distance + "AU from its star, and orbits in " + periodFormat.format(period) + " years: could be habitable? " + this.isHabitable() +"\n";
     }
 }

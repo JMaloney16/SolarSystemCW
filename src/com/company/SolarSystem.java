@@ -17,8 +17,17 @@ public class SolarSystem {
         planets.add(new Planet(name, mass, distance, luminosity));
     }
 
+    public String outputElements(){
+        String list = "";
+        for (Planet current: planets) {
+            list += current.toString();
+        }
+        return list;
+    }
+
     @Override
     public String toString() {
-        return name + "\n" + planets.toString();
+        return name + "\n" + outputElements();
+        //return name + "\n" + planets.toString();
     }
 }

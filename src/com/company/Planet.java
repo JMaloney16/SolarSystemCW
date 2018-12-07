@@ -3,35 +3,53 @@ package com.company;
 import java.text.DecimalFormat;
 
 public class Planet {
-    private String name;
-    private double mass;
-    private double distance;
-    private double period;
-    private double luminosity;
+    private final String NAME;
+    private final double MASS;
+    private final double DISTANCE;
+    private final double PERIOD;
+    private final double SQRT_LUMINOSITY;
 
     public Planet(String name, double mass, double distance, double luminosity) {
-        this.name = name;
-        this.mass = mass;
-        this.distance = distance;
-        this.period = Math.sqrt(distance * distance * distance);
-        this.luminosity = luminosity;
+        this.NAME = name;
+        this.MASS = mass;
+        this.DISTANCE = distance;
+        this.PERIOD = Math.sqrt(distance * distance * distance);
+        this.SQRT_LUMINOSITY = Math.sqrt(luminosity);
     }
 
-    public String isHabitable(){
-        if (mass >= 0.6 && mass <= 7.0 &&
-                (distance * Math.sqrt(luminosity)) >= 0.75 && (distance * Math.sqrt(luminosity)) <= 2.0) {
-            return "yes";
+    public boolean isHabitable(){
+        if (MASS >= 0.6 && MASS <= 7.0 &&
+                DISTANCE >= (SQRT_LUMINOSITY * 0.75) && (DISTANCE <= (SQRT_LUMINOSITY * 2.0))) {
+            return true;
         }else{
-            return "no";
+            return false;
         }
     }
 
+    public String getNAME() {
+        return NAME;
+    }
 
+    public double getMASS() {
+        return MASS;
+    }
+
+    public double getDISTANCE() {
+        return DISTANCE;
+    }
+
+    public double getPERIOD() {
+        return PERIOD;
+    }
+
+    public double getSQRT_LUMINOSITY() {
+        return SQRT_LUMINOSITY;
+    }
 
     @Override
     public String toString() {
         DecimalFormat periodFormat = new DecimalFormat("0.0##");
-        return "Planet " + name + " has a mass of " + mass + " Earths, is "
-                + distance + "AU from its star, and orbits in " + periodFormat.format(period) + " years: could be habitable? " + this.isHabitable() +"\n";
+        return "Planet " + NAME + " has a mass of " + MASS + " Earths, is "
+                + DISTANCE + "AU from its star, and orbits in " + periodFormat.format(PERIOD) + " years: could be habitable? " + (this.isHabitable() ? "yes" : "no") +"\n";
     }
 }

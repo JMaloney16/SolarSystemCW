@@ -3,18 +3,18 @@ package com.company;
 import java.util.ArrayList;
 
 public class SolarSystem {
-    private String name;
-    private double luminosity;
+    private final String NAME;
+    private final double LUMINOSITY;
     private ArrayList<Planet> planets;
 
     public SolarSystem(String name, double luminosity) {
-        this.name = name;
-        this.luminosity = luminosity;
+        this.NAME = name;
+        this.LUMINOSITY = luminosity;
         this.planets = new ArrayList<Planet>();
     }
 
     public void addPlanet(String name, double mass, double distance){
-        planets.add(new Planet(name, mass, distance, luminosity));
+        planets.add(new Planet(name, mass, distance, LUMINOSITY));
     }
 
     public String outputElements(){
@@ -25,9 +25,17 @@ public class SolarSystem {
         return list;
     }
 
+    public String getNAME() {
+        return NAME;
+    }
+
+    public double getLUMINOSITY() {
+        return LUMINOSITY;
+    }
+
     @Override
     public String toString() {
-        return name + "\n" + outputElements();
-        //return name + "\n" + planets.toString();
+        return NAME + "\n" + outputElements();
+        //return NAME + "\n" + planets.toString();
     }
 }

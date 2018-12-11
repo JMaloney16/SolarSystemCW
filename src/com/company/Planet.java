@@ -11,6 +11,14 @@ public class Planet {
     private final SolarSystem system; // The parent system of the planet
     private final double sqrtLuminosity;
 
+    private static final double MAX_MASS = 7.0;
+    private static final double MIN_MASS = 0.6;
+    private static final double MIN_LUMINOSITY_MULTI = 0.75;
+    private static final double MAX_LUMINOSITY_MULTI = 2.0;
+    // Required to output period in the desired format
+    private static final DecimalFormat periodFormat = new DecimalFormat("0.0##");
+
+
     public Planet(String name, double mass, double distance, SolarSystem system) {
         this.name = name;
         this.mass = mass;
@@ -24,8 +32,8 @@ public class Planet {
 
     // Checks mass and compares distance to luminosity to see if the planet is habitable
     public boolean isHabitable(){
-        if (mass >= 0.6 && mass <= 7.0 &&
-                distance >= (sqrtLuminosity * 0.75) && distance <= (sqrtLuminosity * 2.0)) {
+        if (mass >= MIN_MASS && mass <= MAX_MASS &&
+                distance >= (sqrtLuminosity * MIN_LUMINOSITY_MULTI) && distance <= (sqrtLuminosity * MAX_LUMINOSITY_MULTI)) {
             return true;
         }else{
             return false;
@@ -59,7 +67,6 @@ public class Planet {
 
     @Override
     public String toString() {
-        DecimalFormat periodFormat = new DecimalFormat("0.0##"); // Required to output period in the desired format
         return "Planet " + name + " has a mass of " + mass + " Earths, is "
                 + distance + "AU from its star, and orbits in " + periodFormat.format(period)
                 + " years: could be habitable? " + (this.isHabitable() ? "yes" : "no") +"\n";
